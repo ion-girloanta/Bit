@@ -6,13 +6,15 @@ from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
 
 # TESTED WITH python 3.6
-
+# https://github.com/ion-girloanta/Bit.git
 # Fill these from the compilation and from the deploy of the smart contract
+
+
 USER = "e0eaz9d1s8"
 PASS = "CSm6W_uxIXZqGtTkurw7S7wxer-Xsixur2U2LN89-VM"
 RPC_ENDPOINT = "https://e0mnb9789l-e0ki64wmzb-rpc.de0-aws.kaleido.io"
 apikey = 'ZTBlYXo5ZDFzODpDU202V191eElYWnFHdFRrdXJ3N1M3d3hlci1Yc2l4dXIyVTJMTjg5LVZN'
-setBalances = True  
+setBalances = False  
 setTransactions = True
 
 #set balance amt for a specified account (param = receiver)
@@ -136,8 +138,7 @@ if __name__ == '__main__':
       transfer(w3, contract, 
             w3.eth.accounts[random.randint(0, 8)],
             me,
-            i * 100 + random.randint(0, 100)
-            )
+            i * 100 + random.randint(0, 100))
       #Add test transactions from me to random customers
       transfer(w3, contract, 
             me,
@@ -157,13 +158,13 @@ if __name__ == '__main__':
     print(f'total sent transactions {res} from my account:')
     
     print('My received transactions')
-    printTransactions(me)
-    printTransactions(w3.eth.accounts[9])
+    printTransactions(contract, me)
+    printTransactions(contract, accounts[9])
     
     print('do some transfers')
-    transfer(me,account, 1999)
-    transfer(me,account, 222)
-    transfer(account, me, 444)
+    transfer(w3, contract, me,accounts[9], 1999)
+    transfer(w3, contract, me,account[9], 222)
+    transfer(w3, contract, account[9], me, 444)
     
     print('My received transactions')
     printTransactions(contract, me)
